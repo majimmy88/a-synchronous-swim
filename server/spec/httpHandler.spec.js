@@ -25,11 +25,13 @@ describe('server responses', () => {
     // write your test here
     let {req, res} = server.mock('/', 'GET');
 
-    httpHandler.router(res, res);
-    expect(res._responseCode).to.equal(200);
-    expect(res._ended).to.equal(true);
-    expect(res._data.toString()).to.be.empty
-    done();
+    httpHandler.router(req, res, () => {
+      expect(res._responseCode).to.equal(200);
+      expect(res._ended).to.equal(true);
+      expect(res._data.toString()).to.be.a('string');
+
+      done();
+    });
   });
 
   xit('should respond with 404 to a GET request for a missing background image', (done) => {
