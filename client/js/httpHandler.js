@@ -5,20 +5,30 @@
   //
   // TODO: build the swim command fetcher here
   //
-  // const ajaxFetch= (string) => {
+  const ajaxFetch= () => {
+    console.log("in ajax request")
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      // cache: false,
+      // contentType: false,
+      // processData: false,
+      success: (data) => {
+        // reload the page
+          // var directions = ['left', 'right', 'up', 'down']
+          // var randomDirection = directions[Math.floor(Math.random() * directions.length)]
+          SwimTeam.move(data)
+          console.log(data)
+          console.log("GET success")
+      },
+      error: (data) => {
+        console.error('error ')
+      }
+    });
+    
+  };
 
-  //   $.ajax({
-  //     type: 'GET',
-  //     url: 'http://127.0.0.1:3000',
-  //     cache: false,
-  //     contentType: false,
-  //     processData: false,
-  //     success: () => {
-  //       // reload the page
-  //       console.log("GET success")
-  //     }
-  //   });
-  // };
+  //  setInterval(function(){ajaxFetch()}, 1000)
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
@@ -56,7 +66,7 @@
       console.log('Not a jpg file!');
       return;
     }
-    // ajaxFetch(file);
+
     ajaxFileUplaod(file);
   });
 
